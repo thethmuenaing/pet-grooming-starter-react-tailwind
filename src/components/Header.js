@@ -14,6 +14,8 @@ import Program from "./Program";
 const Header = () => {
 	//header bg state
 	const [bg, setBg] = useState(false);
+	//nav mobile state
+	const [navMobile, setNavMobile] = useState(false);
 
 	//scroll event
 	window.addEventListener("scroll", () => {
@@ -38,11 +40,20 @@ const Header = () => {
 				{/* Program */}
 				<Program />
 				{/* nav mobile button */}
-				<div className="lg:hidden cursor-pointer">
+				<div
+					onClick={() => {
+						setNavMobile(!navMobile);
+					}}
+					className="lg:hidden cursor-pointer"
+				>
 					<CgMenuRight className="text-blue text-3xl" />
 				</div>
 				{/* mobile nav */}
-				<div className="hidden">
+				<div
+					className={`${
+						navMobile ? "max-h-[260px] " : "max-h-0 "
+					} fixed bg-yellow shadow-lg left-0 w-full top-[78px] h-full overflow-hidden transition-all`}
+				>
 					<NavMobile />
 				</div>
 			</div>
