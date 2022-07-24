@@ -14,7 +14,15 @@ const Prices = () => {
 
 	useEffect(() => {
 		setBundles(bundleData[0].services);
-	});
+	}, []);
+
+	const getBundle = (name) => {
+		const newBundle = bundleData.find((bundle) => {
+			return bundle.name === name;
+		});
+
+		setBundles(newBundle.services);
+	};
 	return (
 		<section className="py-12 lg:py-24">
 			<div className="container mx-auto">
@@ -34,6 +42,7 @@ const Prices = () => {
 								key={idx}
 								onClick={() => {
 									setIndex(idx);
+									getBundle(name);
 								}}
 								className="cursor-pointer text-center"
 							>
@@ -60,6 +69,8 @@ const Prices = () => {
 						);
 					})}
 				</div>
+				{/* bundles */}
+				<Bundles bundles={bundles} />
 			</div>
 		</section>
 	);
